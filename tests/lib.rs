@@ -32,8 +32,8 @@ async fn test_helloworld() {
         },
     );
 
-    let (mut backs_client, payer, recent_blockhash) = program_test.start().await;
-    let greeted_account = backs_client
+    let (mut banks_client, payer, recent_blockhash) = program_test.start().await;
+    let greeted_account = banks_client
         .get_account(greeted_pubkey)
         .await
         .expect("get_account")
@@ -56,5 +56,5 @@ async fn test_helloworld() {
         Some(&payer.pubkey()),
     );
     transaction.sign(&[&payer], recent_blockhash);
-    backs_client.process_transaction(transaction).await.unwrap();
+    banks_client.process_transaction(transaction).await.unwrap();
 }
